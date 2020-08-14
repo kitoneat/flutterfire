@@ -17,12 +17,9 @@ void main() {
   // Pass all uncaught errors to Crashlytics.
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
 
-  runZonedGuarded(
-    () {
-      runApp(MyApp());
-    },
-    Crashlytics.instance.recordError,
-  );
+  runZoned(() {
+    runApp(MyApp());
+  }, onError: Crashlytics.instance.recordError);
 }
 
 class MyApp extends StatefulWidget {
